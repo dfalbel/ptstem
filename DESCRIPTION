@@ -1,0 +1,9 @@
+Package: ptstem
+Type: Package
+Title: Pacote em R usado para fazer stem em Português
+Version: 0.0.1.92
+Author: Daniel Falbel
+Maintainer: Daniel Falbel <dfalbel@gmail.com>
+Description: Pacote em R usado para fazer stem em Português
+License: MIT + file LICENSE
+LazyData: TRUE
