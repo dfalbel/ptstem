@@ -1,9 +1,15 @@
 Package: ptstem
 Type: Package
-Title: Pacote em R usado para fazer stem em Português
-Version: 0.0.1.92
+Title: Stemming Algorithms for the Portuguese Language
+Version: 0.0.0.9000
 Author: Daniel Falbel
 Maintainer: Daniel Falbel <dfalbel@gmail.com>
-Description: Pacote em R usado para fazer stem em Português
+Description: Wraps a collection of stemming algorithms for the Portuguese
+    Language.
+URL: https://github.com/dfalbel/ptstem
 License: MIT + file LICENSE
 LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports:
+    dplyr,
+    hunspell
