@@ -13,10 +13,11 @@
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 #' stem_hunspell(words)
 #'
+#' @export
 stem_hunspell <- function(words){
   stems <- hunspell::hunspell_stem(
     words,
-    dict = system.file("Portuguese (Brazilian).dic", package = "ptstem")
+    dict = system.file("dict/Portuguese_Brazilian.dic", package = "ptstem")
   )
 
   stem_df <- dplyr::data_frame(
