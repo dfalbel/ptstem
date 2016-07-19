@@ -16,4 +16,5 @@ Imports:
     hunspell,
     magrittr,
     rslp,
+    SnowballC,
     tidyr

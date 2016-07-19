@@ -1,7 +1,7 @@
-#' Stemming using RSLP
+#' Stem using Porter's
 #'
-#' This function uses the RSLP algorithm to stem a vector of words.
-#' By default, the RSLP algorithm leaves words cutted. As this makes
+#' This function uses the Porters's algorithm to stem a vector of words.
+#' By default, the Porter's algorithm leaves words cutted. As this makes
 #' reading stemmed texts very difficult, this function provides an option
 #' to complete the stemmed words. By default it completes with the most used
 #' word in the text that has the same stem.
@@ -9,16 +9,11 @@
 #' @param words character vector of words to be stemmed
 #' @param complete wheter words muste be completed or not (T)
 #'
-#' @references
-#' V. Orengo, C. Huyck, "A Stemming Algorithmm for the Portuguese Language", SPIRE, 2001, String Processing and Information Retrieval, International Symposium on, String Processing and Information Retrieval, International Symposium on 2001, pp. 0186, doi:10.1109/SPIRE.2001.10024
-#'
-#' @examples
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
-#' ptstem:::stem_rslp(words)
+#' ptstem:::stem_porter(words)
 #'
-stem_rslp <- function(words, complete = T){
-
-  stems <- rslp::rslp(words)
+stem_porter <- function(words, complete = T){
+  stems <- SnowballC::wordStem(words, language = "portuguese")
 
   if (complete == F) {
     return(stems)
