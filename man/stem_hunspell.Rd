@@ -20,7 +20,7 @@ takes the stems that appears the most in the vector for each word.
 }
 \examples{
 words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
-stem_hunspell(words)
+ptstem:::stem_hunspell(words)
 
 }
 

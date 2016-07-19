@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
-#' stem_hunspell(words)
+#' ptstem:::stem_hunspell(words)
 #'
-#' @export
 stem_hunspell <- function(words){
   stems <- hunspell::hunspell_stem(
     words,
