@@ -15,4 +15,5 @@ Imports:
     dplyr,
     hunspell,
     magrittr,
+    rslp,
     tidyr
