@@ -16,11 +16,11 @@
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 #' ptstem:::stem_rslp(words)
 #'
-stem_rslp <- function(words, complete = T){
+stem_rslp <- function(words, complete = TRUE){
 
   stems <- rslp::rslp(words)
 
-  if (complete == F) {
+  if (complete == FALSE) {
     return(stems)
   } else {
 

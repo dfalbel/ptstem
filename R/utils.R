@@ -11,3 +11,13 @@ complete_stems <- function(words, stems){
     dplyr::select(stems, new_stems)
   return(stem_word)
 }
+
+#' Extract words
+#' Extracts all words from a character string of texts.
+#' @param texts character vector of texts
+#' @note it uses the regex \code{\\b[:alpha:]+\\b} to extract words.
+extract_words <- function(texts){
+  words <- stringr::str_extract_all(texts, "\\b[:alpha:]+\\b") %>%
+    unlist %>% unique
+  return(words)
+}

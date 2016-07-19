@@ -17,4 +17,5 @@ Imports:
     magrittr,
     rslp,
     SnowballC,
+    stringr,
     tidyr

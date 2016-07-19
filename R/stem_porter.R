@@ -12,10 +12,10 @@
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 #' ptstem:::stem_porter(words)
 #'
-stem_porter <- function(words, complete = T){
+stem_porter <- function(words, complete = TRUE){
   stems <- SnowballC::wordStem(words, language = "portuguese")
 
-  if (complete == F) {
+  if (complete == FALSE) {
     return(stems)
   } else {
 

@@ -4,7 +4,7 @@
 \alias{stem_rslp}
 \title{Stemming using RSLP}
 \usage{
-stem_rslp(words, complete = T)
+stem_rslp(words, complete = TRUE)
 }
 \arguments{
 \item{words}{character vector of words to be stemmed}

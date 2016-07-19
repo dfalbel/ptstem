@@ -4,7 +4,7 @@
 \alias{stem_porter}
 \title{Stem using Porter's}
 \usage{
-stem_porter(words, complete = T)
+stem_porter(words, complete = TRUE)
 }
 \arguments{
 \item{words}{character vector of words to be stemmed}
