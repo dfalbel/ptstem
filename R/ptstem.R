@@ -7,6 +7,9 @@
 #' \code{"rslp"} and \code{"porter"}.
 #' @param ... other arguments passed to the algorithms.
 #' @param n_char minimum number of characters of words to be stemmed. Not used by \code{ptstem_words}.
+#' @param ignore vector of words and regex's to igore. Words are wrapped around \code{stringr::fixed()} for words
+#' like 'banana' dont't get excluded when you ignore 'ana'. Also elements are considered a regex when
+#' they contain at least one punctuation symbol.
 #'
 #' @details
 #' When using "rslp" or "porter" algorithms you can choose wheter to complete words or not using the
@@ -42,9 +45,15 @@ ptstem_words <- function(words, algorithm = "rslp", ...){
 
 #' @rdname ptstem
 #' @export
-ptstem <- function(texts, algorithm = "rslp", n_char = 3, ...){
+ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
   words <- extract_words(texts)
   words <- words[stringr::str_length(words) >= n_char]
+  if (!is.null(ignore)) {
+    ignored_regex <- ignore[stringr::str_detect(ignore, "[:punct:]")]
+    ignored_words <- stringr::fixed(ignore[!stringr::str_detect(ignore, "[:punct:]")])
+    words <- words[!stringr::str_detect(words, ignored_regex)]
+    words <- words[!stringr::str_detect(words, ignored_words)]
+  }
   words_s <- ptstem_words(words, algorithm = algorithm, ...)
   names(words_s) <- sprintf("\\b%s\\b", words)
   texts <- stringr::str_replace_all(texts, words_s)

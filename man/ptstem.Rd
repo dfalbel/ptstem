@@ -7,7 +7,7 @@
 \usage{
 ptstem_words(words, algorithm = "rslp", ...)
 
-ptstem(texts, algorithm = "rslp", n_char = 3, ...)
+ptstem(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...)
 }
 \arguments{
 \item{words, texts}{character vector of words.}
@@ -18,6 +18,10 @@ ptstem(texts, algorithm = "rslp", n_char = 3, ...)
 \item{...}{other arguments passed to the algorithms.}
 
 \item{n_char}{minimum number of characters of words to be stemmed. Not used by \code{ptstem_words}.}
+
+\item{ignore}{vector of words and regex's to igore. Words are wrapped around \code{stringr::fixed()} for words
+like 'banana' dont't get excluded when you ignore 'ana'. Also elements are considered a regex when
+they contain at least one punctuation symbol.}
 }
 \description{
 Stem a character vector of words using the selected algorithm.
