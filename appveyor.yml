@@ -42,4 +42,5 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-USE_RTOOLS: true
+environment:
+  USE_RTOOLS: true
