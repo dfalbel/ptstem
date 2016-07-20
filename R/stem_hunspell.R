@@ -19,18 +19,52 @@ stem_hunspell <- function(words){
     dict = system.file("dict/Portuguese_Brazilian.dic", package = "ptstem")
   )
 
-  stem_df <- dplyr::data_frame(
-    words = words,
-    stems = stems
-  ) %>%
-    tidyr::unnest(stems) %>%
-    dplyr::group_by(stems) %>%
-    dplyr::mutate(n_stem = n())
-
-  word_stem <- stem_df %>%
-    dplyr::group_by(words) %>%
-    dplyr::summarise(stems = dplyr::first(stems, order_by = -n_stem)) %>%
+  word_stem <- unify_stems(words, stems) %>%
     dplyr::right_join(dplyr::data_frame(words = words), by = "words")
 
   return(word_stem$stems)
 }
+
+#' Unify stems by mean position
+#'
+#' Hunspell can suggest a list of stems for a word. This function
+#' tries to aggregate all stems into one. Consider the folowing:
+#'
+#' a c(1,2)
+#' b c(2,3)
+#' c c(3)
+#'
+#' You want that a, b and c to have the same stem.
+#'
+#' @param words character vector of words
+#' @param stems character vector of stems
+#'
+unify_stems <- function(words, stems){
+
+  stem_df <- dplyr::data_frame(
+    words = words,
+    stems = stems
+  )
+
+  word_stem <- stem_df %>%
+    tidyr::unnest(stems) %>%
+    dplyr::group_by(stems) %>%
+    dplyr::mutate(n_stem = n()) %>%
+    dplyr::ungroup()
+
+  stem_stem <- dplyr::left_join(
+    word_stem %>% dplyr::select(-n_stem),
+    word_stem %>% dplyr::rename(new_stems = stems),
+    by = "words"
+    ) %>%
+    dplyr::group_by(stems) %>%
+    dplyr::summarise(new_stems = dplyr::last(new_stems, order_by = n_stem))
+
+  word_stem <- word_stem %>%
+    dplyr::left_join(stem_stem, by = "stems") %>%
+    dplyr::group_by(words) %>%
+    dplyr::summarise(stems = dplyr::first(new_stems))
+
+  return(word_stem)
+}
+
