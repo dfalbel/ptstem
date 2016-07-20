@@ -54,9 +54,11 @@ ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
     words <- words[!stringr::str_detect(words, ignored_regex)]
     words <- words[!stringr::str_detect(words, ignored_words)]
   }
-  words_s <- ptstem_words(words, algorithm = algorithm, ...)
-  names(words_s) <- sprintf("\\b%s\\b", words)
-  texts <- stringr::str_replace_all(texts, words_s)
+  if(length(words) > 0){
+    words_s <- ptstem_words(words, algorithm = algorithm, ...)
+    names(words_s) <- sprintf("\\b%s\\b", words)
+    texts <- stringr::str_replace_all(texts, words_s)
+  }
   return(texts)
 }
 
