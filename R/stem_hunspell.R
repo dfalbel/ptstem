@@ -21,7 +21,8 @@ stem_hunspell <- function(words){
 
   word_stem <- unify_stems(words, stems) %>%
     dplyr::right_join(dplyr::data_frame(words = words), by = "words") %>%
-    dplyr::mutate(stems = stringi::stri_enc_toutf8(stems))
+    dplyr::mutate(stems = stringi::stri_escape_unicode(stems) %>%
+                    stringi::stri_unescape_unicode())
 
   return(word_stem$stems)
 }
