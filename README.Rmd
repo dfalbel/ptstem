@@ -68,6 +68,6 @@ You can stem using those algorithms by changing the `algorithm` argument in `pts
 
 ```{r}
 library(ptstem)
-ptstem(text, algorithm = "hunspell") # hunspell complete words automatically
-ptstem(text, algorithm = "porter", complete = FALSE)
+ptstem(text, algorithm = "hunspell")
+ptstem(text, algorithm = "porter")
 ```

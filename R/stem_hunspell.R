@@ -13,7 +13,7 @@
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 #' ptstem:::stem_hunspell(words)
 #'
-stem_hunspell <- function(words){
+stem_hunspell <- function(words, complete = TRUE){
 
   stems <- hunspell::hunspell_stem(
     words,
@@ -24,7 +24,17 @@ stem_hunspell <- function(words){
     dplyr::right_join(dplyr::data_frame(words = words), by = "words") %>%
     dplyr::mutate(stems = stems)
 
-  return(word_stem$stems)
+  if (complete == FALSE) {
+    return(word_stem$stems)
+  } else {
+
+    stem_word <- complete_stems(word_stem$words, word_stem$stems)
+    word_stem <-  word_stem %>%
+      dplyr::left_join(stem_word, by = "stems")
+
+    return(word_stem$new_stems)
+  }
+
 }
 
 #' Unify stems by mean position
