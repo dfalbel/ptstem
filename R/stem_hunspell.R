@@ -16,13 +16,13 @@
 stem_hunspell <- function(words){
 
   stems <- hunspell::hunspell_stem(
-    stringi::stri_enc_toutf8(words),
+    words,
     dict = system.file("dict/Portuguese_Brazilian.dic", package = "ptstem")
   )
 
   word_stem <- unify_stems(words, stems) %>%
     dplyr::right_join(dplyr::data_frame(words = words), by = "words") %>%
-    dplyr::mutate(stems = stringi::stri_enc_toutf8(stems))
+    dplyr::mutate(stems = stems)
 
   return(word_stem$stems)
 }

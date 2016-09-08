@@ -13,7 +13,8 @@
 #'
 #' @details
 #' When using "rslp" or "porter" algorithms you can choose wheter to complete words or not using the
-#' \code{complete} argument. By default \code{\link{ptstem}} uses \code{complete = T}.
+#' \code{complete} argument. By default \code{\link{ptstem}} uses \code{complete = T}. Hunspell already
+#' completes words.
 #'
 #' @examples
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
@@ -54,7 +55,7 @@ ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
     words <- words[!stringr::str_detect(words, ignored_regex)]
     words <- words[!stringr::str_detect(words, ignored_words)]
   }
-  if(length(words) > 0){
+  if (length(words) > 0) {
     words_s <- ptstem_words(words, algorithm = algorithm, ...)
     names(words_s) <- sprintf("\\b%s\\b", words)
     texts <- stringr::str_replace_all(texts, words_s)

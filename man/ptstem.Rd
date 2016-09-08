@@ -28,7 +28,8 @@ Stem a character vector of words using the selected algorithm.
 }
 \details{
 When using "rslp" or "porter" algorithms you can choose wheter to complete words or not using the
-\code{complete} argument. By default \code{\link{ptstem}} uses \code{complete = T}.
+\code{complete} argument. By default \code{\link{ptstem}} uses \code{complete = T}. Hunspell already
+completes words.
 }
 \examples{
 words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
