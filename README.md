@@ -34,7 +34,7 @@ buscas tratam palavras com o mesmo tronco como sinônimos como um tipo de expans
 um processo de combinação."
 ```
 
-This will use the `rslp` algorithm to stem the text.
+This will use the [`rslp`](https://github.com/dfalbel/rslp) algorithm to stem the text.
 
 ``` r
 library(ptstem)
