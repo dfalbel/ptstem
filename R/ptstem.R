@@ -56,8 +56,12 @@ ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
   if (!is.null(ignore)) {
     ignored_regex <- ignore[stringr::str_detect(ignore, "[:punct:]")]
     ignored_words <- stringr::fixed(ignore[!stringr::str_detect(ignore, "[:punct:]")])
-    words <- words[!stringr::str_detect(words, ignored_regex)]
-    words <- words[!stringr::str_detect(words, ignored_words)]
+    if (length(ignored_regex) > 0) {
+      words <- words[!stringr::str_detect(words, ignored_regex)]
+    }
+    if (length(ignored_words) > 0) {
+      words <- words[!stringr::str_detect(words, ignored_words)]
+    }
   }
   if (length(words) > 0) {
     words_s <- ptstem_words(words, algorithm = algorithm, ...)
