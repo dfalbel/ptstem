@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Home. ptstem 0.0.0.9000</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Daniel Falbel">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="index.html">ptstem 0.0.0.9000</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reference.html">Reference</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<h1>ptstem</h1>
+
+<blockquote>
+<p>Stemming Algorithms for the Portuguese Language</p>
+</blockquote>
+
+<p><a href="https://travis-ci.org/dfalbel/ptstem"><img src="https://travis-ci.org/dfalbel/ptstem.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/dfalbel/ptstem"><img src="https://ci.appveyor.com/api/projects/status/github/dfalbel/ptstem?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a> <a href="https://codecov.io/github/dfalbel/ptstem?branch=master"><img src="https://img.shields.io/codecov/c/github/dfalbel/ptstem/master.svg" alt="Coverage Status"/></a></p>
+
+<p>This packages wraps 3 stemming algorithms for the portuguese language available in R. It unifies the API for the stemmers and provides easy stemming completion.</p>
+
+<h2>Installing</h2>
+
+<p><code>ptstem</code> is not yet available in CRAN. You can install directly from Github using:</p>
+
+<pre><code class="r">devtools::install_github(&quot;dfalbel/ptstem&quot;)
+</code></pre>
+
+<h2>Using</h2>
+
+<p>Consider the following text, extracted from <a href="https://pt.wikipedia.org/wiki/Stemiza%C3%A7%C3%A3o">Stemming in Wikipedia</a></p>
+
+<pre><code class="r">text &lt;- &quot;Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é
+o processo de reduzir palavras flexionadas (ou às vezes derivadas) ao seu tronco (stem), base ou
+raiz, geralmente uma forma da palavra escrita. O tronco não precisa ser idêntico à raiz morfológica
+da palavra; ele geralmente é suficiente que palavras relacionadas sejam mapeadas para o mesmo
+tronco, mesmo se este tronco não for ele próprio uma raiz válida. O estudo de algoritmos para
+stemização tem sido realizado em ciência da computação desde a década de 60. Vários motores de
+buscas tratam palavras com o mesmo tronco como sinônimos como um tipo de expansão de consulta, em
+um processo de combinação.&quot;
+</code></pre>
+
+<p>This will use the <code>rslp</code> algorithm to stem the text.</p>
+
+<pre><code class="r">library(ptstem)
+ptstem(text, algorithm = &quot;rslp&quot;, complete = FALSE)
+#&gt; [1] &quot;Em morfolog linguis e recuper de inform a stemiz (do ingl, stemming) é\no process de reduz palavr flexion (ou às vez deriv) ao seu tronc (st), bas ou\nraiz, geral uma form da palavr escrit. O tronc nao precis ser ident à raiz morfolog\nda palavr; ele geral é sufici que palavr relacion sej mape par o mesm\ntronc, mesm se est tronc nao for ele propri uma raiz val. O estud de algoritm par\nstemiz tem sid realiz em cienc da comput desd a dec de 60. Vari motor de\nbusc trat palavr com o mesm tronc com sinon com um tip de expans de consult, em\num process de combin.&quot;
+</code></pre>
+
+<p>You can complete stemmed words using the argument <code>complete = T</code>.</p>
+
+<pre><code class="r">ptstem(text, algorithm = &quot;rslp&quot;, complete = TRUE)
+</code></pre>
+
+<p>The other implemented algorithms are:</p>
+
+<ul>
+<li>  hunspell: the same algorithm used in OpenOffice corrector. (available via <a href="https://github.com/ropensci/hunspell">hunspell</a> package)</li>
+<li>  porter: available via SnowballC package.</li>
+</ul>
+
+<p>You can stem using those algorithms by changing the <code>algorithm</code> argument in <code>ptstem</code> function.</p>
+
+<pre><code class="r">library(ptstem)
+ptstem(text, algorithm = &quot;hunspell&quot;) # hunspell complete words automatically
+#&gt; [1] &quot;Em morfologia linguístico e recuperação de formação a stemização (do inglês, stemming) é\no processar de duzir palavrar flexionar (ou às vezar derivar) ao seu troncar (stem), basar ou\nraiz, geral um formar da palavrar escrever. O troncar não precisar ser idêntico à raiz morfologia\nda palavrar; elar geral é suficiente que palavrar relacionar ser mapear parir o mesmo\ntroncar, mesmo se este troncar não for elar próprio um raiz válido. O estudar de algoritmo parir\nstemização ter ser realizar em ciência da computação desder a década de 60. vário motor de\nbuscar tratar palavrar m o mesmo troncar comer sinônimo comer um tipo de expansão de consultar, em\num processar de combinação.&quot;
+ptstem(text, algorithm = &quot;porter&quot;, complete = FALSE)
+#&gt; [1] &quot;Em morfolog linguíst e recuper de inform a stemiz (do inglês, stemming) é\no process de reduz palavr flexion (ou às vez deriv) ao seu tronc (stem), bas ou\nraiz, geral uma form da palavr escrit. O tronc nã precis ser idênt à raiz morfológ\nda palavr; ele geral é suficient que palavr relacion sej map par o mesm\ntronc, mesm se este tronc nã for ele própri uma raiz vál. O estud de algoritm par\nstemiz tem sid realiz em ciênc da comput desd a déc de 60. Vári motor de\nbusc trat palavr com o mesm tronc com sinôn com um tip de expansã de consult, em\num process de combin.&quot;
+</code></pre>
+
+  </div>
+
+  <div class="span3 offset1 sidebar">
+        <h2>Authors</h2>
+    <ul>
+    </ul>
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="https://getbootstrap.com/2.0.4/">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
