@@ -19,3 +19,55 @@ ptstem
 [![Travis-CI Build Status](https://travis-ci.org/dfalbel/ptstem.svg?branch=master)](https://travis-ci.org/dfalbel/ptstem)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dfalbel/ptstem?branch=master&svg=true)](https://ci.appveyor.com/project/dfalbel/ptstem)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dfalbel/ptstem/master.svg)](https://codecov.io/github/dfalbel/ptstem?branch=master)
+
+This packages wraps 3 stemming algorithms for the portuguese language available in R. It
+unifies the API for the stemmers and provides easy stemming completion.
+
+## Installing
+
+`ptstem` is not yet available in CRAN. You can install directly from Github using:
+
+```{r, eval = F}
+devtools::install_github("dfalbel/ptstem")
+```
+
+## Using
+
+Consider the following text, extracted from [Stemming in Wikipedia](https://pt.wikipedia.org/wiki/Stemiza%C3%A7%C3%A3o)
+
+```{r}
+text <- "Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é
+o processo de reduzir palavras flexionadas (ou às vezes derivadas) ao seu tronco (stem), base ou
+raiz, geralmente uma forma da palavra escrita. O tronco não precisa ser idêntico à raiz morfológica
+da palavra; ele geralmente é suficiente que palavras relacionadas sejam mapeadas para o mesmo
+tronco, mesmo se este tronco não for ele próprio uma raiz válida. O estudo de algoritmos para
+stemização tem sido realizado em ciência da computação desde a década de 60. Vários motores de
+buscas tratam palavras com o mesmo tronco como sinônimos como um tipo de expansão de consulta, em
+um processo de combinação."
+```
+
+This will use the `rslp` algorithm to stem the text.
+
+```{r}
+library(ptstem)
+ptstem(text, algorithm = "rslp", complete = FALSE)
+```
+
+You can complete stemmed words using the argument `complete = T`.
+
+```{r, eval = F}
+ptstem(text, algorithm = "rslp", complete = TRUE)
+```
+
+The other implemented algorithms are:
+
+* hunspell: the same algorithm used in OpenOffice corrector. (available via [hunspell](https://github.com/ropensci/hunspell) package)
+* porter: available via SnowballC package.
+
+You can stem using those algorithms by changing the `algorithm` argument in `ptstem` function.
+
+```{r}
+library(ptstem)
+ptstem(text, algorithm = "hunspell") # hunspell complete words automatically
+ptstem(text, algorithm = "porter", complete = FALSE)
+```

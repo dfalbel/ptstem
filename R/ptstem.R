@@ -58,6 +58,7 @@ ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
   if (length(words) > 0) {
     words_s <- ptstem_words(words, algorithm = algorithm, ...)
     names(words_s) <- sprintf("\\b%s\\b", words)
+    words_s <- words_s[!is.na(words_s)]
     texts <- stringr::str_replace_all(texts, words_s)
   }
   return(texts)
