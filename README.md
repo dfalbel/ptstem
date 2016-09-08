@@ -21,7 +21,7 @@ devtools::install_github("dfalbel/ptstem")
 Using
 -----
 
-Consider the following text, extracted from [R page in Wikipedia](https://pt.wikipedia.org/wiki/R_(linguagem_de_programa%C3%A7%C3%A3o))
+Consider the following text, extracted from [Stemming in Wikipedia](https://pt.wikipedia.org/wiki/Stemiza%C3%A7%C3%A3o)
 
 ``` r
 text <- "Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é
