@@ -4,10 +4,12 @@
 \alias{stem_hunspell}
 \title{Stemming using Hunspell}
 \usage{
-stem_hunspell(words)
+stem_hunspell(words, complete = TRUE)
 }
 \arguments{
 \item{words}{character vector of words to be stemmed}
+
+\item{complete}{wheter words must be completed or not (T)}
 }
 \description{
 This function uses Hunspell Stemmer to stem a vector of words.

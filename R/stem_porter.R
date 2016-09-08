@@ -7,7 +7,7 @@
 #' word in the text that has the same stem.
 #'
 #' @param words character vector of words to be stemmed
-#' @param complete wheter words muste be completed or not (T)
+#' @param complete wheter words must be completed or not (T)
 #'
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 #' ptstem:::stem_porter(words)

@@ -7,7 +7,7 @@
 #' word in the text that has the same stem.
 #'
 #' @param words character vector of words to be stemmed
-#' @param complete wheter words muste be completed or not (T)
+#' @param complete wheter words must be completed or not (T)
 #'
 #' @references
 #' V. Orengo, C. Huyck, "A Stemming Algorithmm for the Portuguese Language", SPIRE, 2001, String Processing and Information Retrieval, International Symposium on, String Processing and Information Retrieval, International Symposium on 2001, pp. 0186, doi:10.1109/SPIRE.2001.10024

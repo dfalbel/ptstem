@@ -8,6 +8,7 @@
 #' takes the stems that appears the most in the vector for each word.
 #'
 #' @param words character vector of words to be stemmed
+#' @param complete wheter words must be completed or not (T)
 #'
 #' @examples
 #' words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")

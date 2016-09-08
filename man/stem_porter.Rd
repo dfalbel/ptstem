@@ -9,7 +9,7 @@ stem_porter(words, complete = TRUE)
 \arguments{
 \item{words}{character vector of words to be stemmed}
 
-\item{complete}{wheter words muste be completed or not (T)
+\item{complete}{wheter words must be completed or not (T)
 
 words <- c("balões", "aviões", "avião", "gostou", "gosto", "gostaram")
 ptstem:::stem_porter(words)}
