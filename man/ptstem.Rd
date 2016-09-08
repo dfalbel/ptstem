@@ -28,7 +28,7 @@ Stem a character vector of words using the selected algorithm.
 }
 \details{
 You can choose wheter to complete words or not using the \code{complete} argument. By default all
-algorithms are completing stems. For hunspell, it's better to always use complete = TRUE since even
+algorithms are completing stems. For hunspell, it's better to always use \code{complete = TRUE} since even
 when using complete = FALSE it will complete words.
 
 Complete finds the stem that appears the most in the full corpus. That's why it should not be used when
@@ -45,6 +45,7 @@ texts <- c("coma frutas pois elas fazem bem para a saúde.",
 ptstem(texts, "hunspell")
 ptstem(texts, n_char = 5)
 ptstem(texts, "porter", n_char = 4, complete = FALSE)
+ptstem(words, ignore = "av.*") # words starting with "av" are not stemmed
 
 
 }
