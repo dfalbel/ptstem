@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>ptstem_words. ptstem 0.0.0.9000</title>
+<title>ptstem_words. ptstem 0.0.1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">ptstem 0.0.0.9000</a>
+      <a class="brand" href="index.html">ptstem 0.0.1</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -109,10 +109,12 @@ you are stemming in parallel.</p>
 <span class="symbol">texts</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"coma frutas pois elas fazem bem para a saúde."</span><span class="keyword">,</span>
 <span class="string">"não coma doces, eles fazem mal para os dentes."</span><span class="keyword">)</span>
 <span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="string">"hunspell"</span><span class="keyword">)</span></div>
-<div class='output'>[1] &quot;coma frutas pois elas fazem bem para a saúde.&quot;  &quot;não coma doces, elas fazem mal para os dentes.&quot;
+<div class='output'>[1] &quot;coma frutas pois elas fazem bem para a saúde.&quot; 
+[2] &quot;não coma doces, elas fazem mal para os dentes.&quot;
 </div>
 <div class='input'><span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="argument">n_char</span> <span class="argument">=</span> <span class="number">5</span><span class="keyword">)</span></div>
-<div class='output'>[1] &quot;coma frutas pois elas fazem bem para a saúde.&quot;  &quot;não coma doces, eles fazem mal para os dentes.&quot;
+<div class='output'>[1] &quot;coma frutas pois elas fazem bem para a saúde.&quot; 
+[2] &quot;não coma doces, eles fazem mal para os dentes.&quot;
 </div>
 <div class='input'><span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="string">"porter"</span><span class="keyword">,</span> <span class="argument">n_char</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span> <span class="argument">complete</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span></div>
 <div class='output'>[1] &quot;com frut pois elas faz bem par a saúd.&quot; &quot;não com doc, eles faz mal par os dent.&quot;
