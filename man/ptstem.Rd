@@ -5,7 +5,7 @@
 \alias{ptstem_words}
 \title{Stem Words}
 \usage{
-ptstem_words(words, algorithm = "rslp", complete, ...)
+ptstem_words(words, algorithm = "rslp", complete = T, ...)
 
 ptstem(texts, algorithm = "rslp", n_char = 3, complete = T,
   ignore = NULL, ...)

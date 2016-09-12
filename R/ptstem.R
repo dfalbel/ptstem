@@ -38,7 +38,7 @@
 #' @rdname ptstem
 #'
 #' @export
-ptstem_words <- function(words, algorithm = "rslp", complete, ...){
+ptstem_words <- function(words, algorithm = "rslp", complete = T, ...){
   stopifnot(algorithm %in% c("hunspell", "rslp", "porter"))
   stopifnot(complete %in% c(TRUE, FALSE) & (!is.numeric(complete)))
   if (algorithm == "hunspell") {
