@@ -15,11 +15,11 @@ test_that("Stemming Hunspell Works", {
   expect_equal(
     ptstem(texts, algorithm = "hunspell"),
     c("coma frutas pois elas fazem bem para a sa\u00fade", "n\u00e3o coma doces, elas fazem mal para os dentes")
-    )
+  )
   expect_equal(
     ptstem(words, algorithm = "hunspell"),
     c("bal\u00f5es", "avi\u00f5es", "avi\u00f5es", "gostou", "gostou", "gostou")
-    )
+  )
 })
 
 test_that("Stemming RSLP Works", {
@@ -46,13 +46,11 @@ test_that("Stemming Porter Works", {
 
 context("Arguments")
 
-ptstem(texts = c("ela", "elas", "eles"), algorithm = "hunspell", n_char = 4)
-
 test_that("n_char argument", {
   expect_equal(
     ptstem(texts = c("ela", "elas", "eles"), algorithm = "hunspell", n_char = 4),
     c("ela", "elas", "elas")
-    )
+  )
   expect_equal(ptstem("abreviado", algorithm = "hunspell", n_char = 10), "abreviado")
 })
 
@@ -61,3 +59,23 @@ test_that("ignore argument", {
   expect_equal(ptstem("abreviado", algorithm = "hunspell", ignore = ".o$"), "abreviado")
   expect_equal(ptstem("abreviado", algorithm = "hunspell", ignore = ".brev"), "abreviado")
 })
+
+test_that("error wrong algorithm", {
+  expect_error(ptstem("oi, tudo bem?", algorithm = "saka"))
+  expect_error(ptstem_words("oi, tudo bem?", algorithm = "saka"))
+  expect_error(ptstem_words("oi, tudo bem?", algorithm = NA))
+  expect_error(ptstem_words("oi, tudo bem?", algorithm = 1))
+})
+
+test_that("complete is logical", {
+  expect_error(ptstem("oi, tudo bem?", complete = NA))
+  expect_error(ptstem_words("oi, tudo bem?", complete = "aja"))
+  expect_error(ptstem_words("oi, tudo bem?", complete = 1))
+})
+
+test_that("error when ignore is NA", {
+  expect_error(ptstem("oi, tudo bem?", ignore = NA))
+})
+
+
+

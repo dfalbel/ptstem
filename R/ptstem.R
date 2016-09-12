@@ -10,6 +10,8 @@
 #' @param ignore vector of words and regex's to igore. Words are wrapped around \code{stringr::fixed()} for words
 #' like 'banana' dont't get excluded when you ignore 'ana'. Also elements are considered a regex when
 #' they contain at least one punctuation symbol.
+#' @param complete wheter to complete words or not i.e. change all words with the same stem by the word that appears
+#' the most with that stem.
 #'
 #' @details
 #' You can choose wheter to complete words or not using the \code{complete} argument. By default all
@@ -36,7 +38,9 @@
 #' @rdname ptstem
 #'
 #' @export
-ptstem_words <- function(words, algorithm = "rslp", ...){
+ptstem_words <- function(words, algorithm = "rslp", complete, ...){
+  stopifnot(algorithm %in% c("hunspell", "rslp", "porter"))
+  stopifnot(complete %in% c(TRUE, FALSE) & (!is.numeric(complete)))
   if (algorithm == "hunspell") {
     return(stem_hunspell(words))
   }
@@ -50,7 +54,9 @@ ptstem_words <- function(words, algorithm = "rslp", ...){
 
 #' @rdname ptstem
 #' @export
-ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
+ptstem <- function(texts, algorithm = "rslp", n_char = 3, complete = T, ignore = NULL, ...){
+  stopifnot(algorithm %in% c("hunspell", "rslp", "porter"))
+  stopifnot(complete %in% c(TRUE, FALSE) & (!is.numeric(complete)))
   words <- extract_words(texts)
   words <- words[stringr::str_length(words) >= n_char]
   if (!is.null(ignore)) {
@@ -64,7 +70,7 @@ ptstem <- function(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...){
     }
   }
   if (length(words) > 0) {
-    words_s <- ptstem_words(words, algorithm = algorithm, ...)
+    words_s <- ptstem_words(words, algorithm = algorithm, complete = complete, ...)
     names(words_s) <- sprintf("\\b%s\\b", words)
     words_s <- words_s[!is.na(words_s)]
     texts <- stringr::str_replace_all(texts, words_s)

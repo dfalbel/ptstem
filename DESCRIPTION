@@ -1,7 +1,7 @@
 Package: ptstem
 Type: Package
 Title: Stemming Algorithms for the Portuguese Language
-Version: 0.0.1
+Version: 0.0.1.9000
 Author: Daniel Falbel
 Maintainer: Daniel Falbel <dfalbel@gmail.com>
 Description: Wraps a collection of stemming algorithms for the Portuguese

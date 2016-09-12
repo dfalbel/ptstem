@@ -5,15 +5,19 @@
 \alias{ptstem_words}
 \title{Stem Words}
 \usage{
-ptstem_words(words, algorithm = "rslp", ...)
+ptstem_words(words, algorithm = "rslp", complete, ...)
 
-ptstem(texts, algorithm = "rslp", n_char = 3, ignore = NULL, ...)
+ptstem(texts, algorithm = "rslp", n_char = 3, complete = T,
+  ignore = NULL, ...)
 }
 \arguments{
 \item{words, texts}{character vector of words.}
 
 \item{algorithm}{string with the name of the algorithm to be used. One of \code{"hunspell"},
 \code{"rslp"} and \code{"porter"}.}
+
+\item{complete}{wheter to complete words or not i.e. change all words with the same stem by the word that appears
+the most with that stem.}
 
 \item{...}{other arguments passed to the algorithms.}
 
