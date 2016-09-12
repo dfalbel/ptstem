@@ -27,11 +27,18 @@ unifies the API for the stemmers and provides easy stemming completion.
 
 ## Installing
 
-`ptstem` is not yet available in CRAN. You can install directly from Github using:
+You can install directly from Github using:
 
 ```{r, eval = F}
 devtools::install_github("dfalbel/ptstem")
 ```
+
+or from CRAN using:
+
+```{r, eval=FALSE}
+install.packages("ptstem")
+```
+
 
 ## Using
 
