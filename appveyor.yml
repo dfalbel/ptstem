@@ -13,7 +13,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - install_github jimhester/covr
+  - travis-tool.sh install_github jimhester/covr
   - travis-tool.sh install_deps
 
 test_script:
