@@ -38,4 +38,31 @@ understemming_index <- function(words, stems){
   sum(aux$misclassified)/nrow(words)
 }
 
+#' Performance
+#'
+#' @param stemmers a character vector with names of stemming algorithms.
+#' In the near future, functions will also be accepted.
+#'
+#' @return a data.frame with the following measures calculated for each stemmer:
+#' \item{UI}{Understemming Index}
+#' \item{OI}{Overstemming Index}
+#'
+#' @examples
+#' perf <- performance()
+#' print(perf)
+#'
+#' @export
+performance <- function(stemmers = c("rslp", "hunspell", "porter")){
+  names(stemmers) <- stemmers
+  words <- readRDS(system.file("words_sample.rda", package = "ptstem"))
+  plyr::ldply(stemmers, function(stem){
+    stems <- ptstem(words$word, algorithm = stem)
+    data.frame(
+      UI = understemming_index(words, stems),
+      OI = overstemming_index(words, stems)
+    )
+  })
+}
+
+
 

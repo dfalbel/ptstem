@@ -19,5 +19,7 @@ Imports:
     SnowballC,
     stringr,
     tidyr
-Suggests: testthat,
-    covr
+Suggests:
+    testthat,
+    covr,
+    plyr
