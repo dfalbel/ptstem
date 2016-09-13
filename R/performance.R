@@ -52,7 +52,7 @@ understemming_index <- function(words, stems){
 #' print(perf)
 #'
 #' @export
-performance <- function(stemmers = c("rslp", "hunspell", "porter")){
+performance <- function(stemmers = c("rslp", "hunspell", "porter", "modified-hunspell")){
   names(stemmers) <- stemmers
   words <- readRDS(system.file("words_sample.rda", package = "ptstem"))
   plyr::ldply(stemmers, function(stem){
