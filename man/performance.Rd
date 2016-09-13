@@ -19,8 +19,7 @@ a data.frame with the following measures calculated for each stemmer:
 Performance
 }
 \examples{
-perf <- performance()
-print(perf)
+\dontrun{perf <- performance()}
 
 }
 
