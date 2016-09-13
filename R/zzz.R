@@ -10,4 +10,4 @@
 #' @usage lhs \%>\% rhs
 NULL
 
-globalVariables(c("n", "n_stem", "n_word", "new_stems"))
+globalVariables(c("n", "n_stem", "n_word", "new_stems", "group", "n_word_stem", "n_group_stem"))

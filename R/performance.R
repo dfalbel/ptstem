@@ -13,7 +13,7 @@ overstemming_index <- function(words, stems){
     dplyr::summarise(n_group_stem = n()) %>%
     dplyr::ungroup() %>%
     dplyr::group_by(stems) %>%
-    dplyr::filter(row_number(desc(n_group_stem)) > 1) %>%
+    dplyr::filter(dplyr::row_number(dplyr::desc(n_group_stem)) > 1) %>%
     dplyr::summarise(misclassified = sum(n_group_stem))
   sum(aux$misclassified)/nrow(words)
 }
@@ -33,7 +33,7 @@ understemming_index <- function(words, stems){
     dplyr::summarise(n_word_stem = n()) %>%
     dplyr::ungroup() %>%
     dplyr::group_by(group) %>%
-    dplyr::filter(row_number(desc(n_word_stem)) > 1) %>%
+    dplyr::filter(dplyr::row_number(dplyr::desc(n_word_stem)) > 1) %>%
     dplyr::summarise(misclassified = sum(n_word_stem))
   sum(aux$misclassified)/nrow(words)
 }
@@ -48,7 +48,7 @@ understemming_index <- function(words, stems){
 #' \item{OI}{Overstemming Index}
 #'
 #' @examples
-#' \dontrun{perf <- performance()}
+#' perf <- performance()
 #'
 #' @export
 performance <- function(stemmers = c("rslp", "hunspell", "porter", "modified-hunspell")){

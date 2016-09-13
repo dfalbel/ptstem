@@ -4,4 +4,5 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^appveyor\.yml$
+^data-raw$
 ^docs$
