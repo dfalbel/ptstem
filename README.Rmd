@@ -83,17 +83,19 @@ ptstem(text, algorithm = "porter")
 
 ## Performance
 
-The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk abou two kinds of possible errors when using those algorithms:
+The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk about two kinds of possible errors when stemming:
 
 * Understemming: Related words were not grouped because you didn't stem enought.
 * Overstemming: Unrelated words were grouped because you removed a large part of the word when stemming.
 
-For measuring this errors the function `performance` was implemented. It returns a `data.frame` with 3 columns. The name of the stemmer and 2 metrics:
+To measure these errors the function `performance` was implemented. It returns a `data.frame` with 3 columns. The name of the stemmer and 2 metrics:
 
 * UI: the undersampling index. It's the proportion of related words that were not grouped.
-* OI: the overstemming index. It's the proportion of unrelated words that were grouped.
+* OI: the overstemming index. It's the proportion of unrelated words that were grouped. 
 
-`ptstem` package provides a dataset of grouped words for the portuguese (found in this [link](http://www.inf.ufrgs.br/~fnflores/paice_tool/)). It's in this dataset that `performance` function calculate metrics described above.
+Remember that OI is 0 if you don't stem. So I think the true objective of a stemming algorithm is to reduce UI without augmenting OI too much.
+
+`ptstem` package provides a dataset of grouped words for the portuguese language (found in this [link](http://www.inf.ufrgs.br/~fnflores/paice_tool/)). It's in this dataset that `performance` function calculates the metrics described above.
 
 See results:
 
