@@ -68,3 +68,31 @@ ptstem(text, algorithm = "hunspell")
 ptstem(text, algorithm = "porter")
 #> [1] "Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é\no processo de reduzir palavras flexionadas (ou às vezes derivadas) ao seu tronco (stem), base ou\nraiz, geralmente uma forma da palavras escrita. O tronco não precisa ser idêntico à raiz morfológica\nda palavras; ele geralmente é suficiente que palavras relacionadas sejam mapeadas para o mesmo\ntronco, mesmo se este tronco não for ele próprio uma raiz válida. O estudo de algoritmos para\nstemização tem sido realizado em ciência da computação desde a década de 60. Vários motores de\nbuscas tratam palavras com o mesmo tronco com sinônimos com um tipo de expansão de consulta, em\num processo de combinação."
 ```
+
+Performance
+-----------
+
+The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk abou two kinds of possible errors when using those algorithms:
+
+-   Understemming: Related words were not grouped because you didn't stem enought.
+-   Overstemming: Unrelated words were grouped because you removed a large part of the word when stemming.
+
+For measuring this errors the function `performance` was implemented. It returns a `data.frame` with 3 columns. The name of the stemmer and 2 metrics:
+
+-   UI: the undersampling index. It's the proportion of related words that were not grouped.
+-   OI: the overstemming index. It's the proportion of unrelated words that were grouped.
+
+`ptstem` package provides a dataset of grouped words for the portuguese (found in this [link](http://www.inf.ufrgs.br/~fnflores/paice_tool/)). It's in this dataset that `performance` function calculate metrics described above.
+
+See results:
+
+``` r
+performance()
+#>                 .id         UI         OI
+#> 1              rslp 0.08540752 0.04929234
+#> 2          hunspell 0.12835530 0.03221083
+#> 3            porter 0.13958028 0.03221083
+#> 4 modified-hunspell 0.05466081 0.06295754
+```
+
+This is not the only approach for measuring performance of the those algorithms. The article [*Assessing the impact of Stemming Accuracy on Information Retrieval – A multilingual perspective*](http://dx.doi.org/10.1016/j.ipm.2016.03.004) describes various ways to analyse stemming performance.

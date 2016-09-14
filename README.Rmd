@@ -80,3 +80,26 @@ library(ptstem)
 ptstem(text, algorithm = "hunspell")
 ptstem(text, algorithm = "porter")
 ```
+
+## Performance
+
+The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk abou two kinds of possible errors when using those algorithms:
+
+* Understemming: Related words were not grouped because you didn't stem enought.
+* Overstemming: Unrelated words were grouped because you removed a large part of the word when stemming.
+
+For measuring this errors the function `performance` was implemented. It returns a `data.frame` with 3 columns. The name of the stemmer and 2 metrics:
+
+* UI: the undersampling index. It's the proportion of related words that were not grouped.
+* OI: the overstemming index. It's the proportion of unrelated words that were grouped.
+
+`ptstem` package provides a dataset of grouped words for the portuguese (found in this [link](http://www.inf.ufrgs.br/~fnflores/paice_tool/)). It's in this dataset that `performance` function calculate metrics described above.
+
+See results:
+
+```{r}
+performance()
+```
+
+This is not the only approach for measuring performance of the those algorithms. The article [*Assessing the impact of Stemming Accuracy on Information Retrieval – A multilingual perspective*](http://dx.doi.org/10.1016/j.ipm.2016.03.004) describes various ways to analyse stemming performance.
+

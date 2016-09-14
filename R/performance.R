@@ -54,13 +54,13 @@ understemming_index <- function(words, stems){
 performance <- function(stemmers = c("rslp", "hunspell", "porter", "modified-hunspell")){
   names(stemmers) <- stemmers
   words <- readRDS(system.file("words_sample.rda", package = "ptstem"))
-  plyr::ldply(stemmers, function(stem){
+  plyr::ldply(stemmers, function(stem, words){
     stems <- ptstem(words$word, algorithm = stem)
     data.frame(
       UI = understemming_index(words, stems),
       OI = overstemming_index(words, stems)
     )
-  })
+  },words = words)
 }
 
 
