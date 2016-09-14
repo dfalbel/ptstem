@@ -25,7 +25,7 @@ stem_modified_hunspell <- function(words, complete = TRUE){
   )
 
   stems <- plyr::llply(stems, function(w){
-    unique(ptstem_words(w, algorithm = "rslp", complete = F))
+    unique(ptstem(w, algorithm = "rslp", complete = F))
   })
 
   word_stem <- unify_stems(words, stems) %>%
