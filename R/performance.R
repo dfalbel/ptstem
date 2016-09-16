@@ -48,7 +48,7 @@ understemming_index <- function(words, stems){
 #' \item{OI}{Overstemming Index}
 #'
 #' @examples
-#' perf <- performance()
+#' \dontrun{perf <- performance()}
 #'
 #' @export
 performance <- function(stemmers = c("rslp", "hunspell", "porter", "modified-hunspell")){

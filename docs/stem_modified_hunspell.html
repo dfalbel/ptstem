@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>stem_rslp. ptstem 0.0.2</title>
+<title>stem_modified_hunspell. ptstem 0.0.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -49,12 +49,12 @@
         
       </header>
       
-      <h1>Stemming using RSLP</h1>
+      <h1>Stemming with small modification of Hunspell</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='stem_rslp.html'>stem_rslp</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="argument">complete</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
+    <pre><span class="functioncall"><a href='stem_modified_hunspell.html'>stem_modified_hunspell</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="argument">complete</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">TRUE</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -67,31 +67,32 @@
     <div class="Description">
       <h2>Description</h2>
 
-      <p>This function uses the RSLP algorithm to stem a vector of words.
-By default, the RSLP algorithm leaves words cutted. As this makes
-reading stemmed texts very difficult, this function provides an option
-to complete the stemmed words. By default it completes with the most used
-word in the text that has the same stem.</p>
+      <p>This function uses Hunspell Stemmer to stem a vector of words.
+It uses the (Portuguese Brazilian) dictionary by default, and unlike
+hunspell::hunspell_stem it returns only one stem per word.</p>
 
     </div>
 
-    <div class="References">
-      <h2>References</h2>
+    <div class="Details">
+      <h2>Details</h2>
 
-      <p>V. Orengo, C. Huyck, &quot;A Stemming Algorithmm for the Portuguese Language&quot;, SPIRE, 2001, String Processing and Information Retrieval, International Symposium on, String Processing and Information Retrieval, International Symposium on 2001, pp. 0186, doi:10.1109/SPIRE.2001.10024</p>
+      <p>Then it uses the rslp stemmer in the hunspell stemmed result.</p>
+
+      <p>As hunspell_stem can return a list of stems for each word, the function
+takes the stems that appears the most in the vector for each word.</p>
 
     </div>
     
     <h2 id="examples">Examples</h2>
     <pre class="examples"><div class='input'><span class="symbol">words</span> <span class="assignement">&lt;-</span> <span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"balões"</span><span class="keyword">,</span> <span class="string">"aviões"</span><span class="keyword">,</span> <span class="string">"avião"</span><span class="keyword">,</span> <span class="string">"gostou"</span><span class="keyword">,</span> <span class="string">"gosto"</span><span class="keyword">,</span> <span class="string">"gostaram"</span><span class="keyword">)</span>
-<span class="package">ptstem</span><span class="keyword">:::</span><span class="functioncall"><a href='stem_rslp.html'>stem_rslp</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">)</span></div>
+<span class="package">ptstem</span><span class="keyword">:::</span><span class="functioncall"><a href='stem_modified_hunspell.html'>stem_modified_hunspell</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">)</span></div>
 <div class='output'>[1] &quot;balões&quot; &quot;aviões&quot; &quot;aviões&quot; &quot;gostou&quot; &quot;gostou&quot; &quot;gostou&quot;
 </div>
 <div class='input'></div></pre>
   </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>stem_rslp</li>
+      <li>stem_modified_hunspell</li>
     </ul>
     <ul>
       

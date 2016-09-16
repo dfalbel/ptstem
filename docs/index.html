@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>Home. ptstem 0.0.1</title>
+<title>Home. ptstem 0.0.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Daniel Falbel">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">ptstem 0.0.1</a>
+      <a class="brand" href="index.html">ptstem 0.0.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -59,16 +59,20 @@
 <p>Stemming Algorithms for the Portuguese Language</p>
 </blockquote>
 
-<p><a href="https://travis-ci.org/dfalbel/ptstem"><img src="https://travis-ci.org/dfalbel/ptstem.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/dfalbel/ptstem"><img src="https://ci.appveyor.com/api/projects/status/github/dfalbel/ptstem?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a>
-<a href="https://codecov.io/github/dfalbel/ptstem?branch=master"><img src="https://img.shields.io/codecov/c/github/dfalbel/ptstem/master.svg" alt="Coverage Status"/></a></p>
+<p><a href="https://travis-ci.org/dfalbel/ptstem"><img src="https://travis-ci.org/dfalbel/ptstem.svg?branch=master" alt="Travis-CI Build Status"/></a> <a href="https://ci.appveyor.com/project/dfalbel/ptstem"><img src="https://ci.appveyor.com/api/projects/status/github/dfalbel/ptstem?branch=master&amp;svg=true" alt="AppVeyor Build Status"/></a> <a href="https://codecov.io/github/dfalbel/ptstem?branch=master"><img src="https://img.shields.io/codecov/c/github/dfalbel/ptstem/master.svg" alt="Coverage Status"/></a> <a href="https://cran.r-project.org/package=ptstem"><img src="http://www.r-pkg.org/badges/version/ptstem" alt="CRAN\_Status\_Badge"/></a> <a href="http://cran.r-project.org/web/packages/ptstem/index.html"><img src="http://cranlogs.r-pkg.org/badges/ptstem" alt=""/></a></p>
 
 <p>This packages wraps 3 stemming algorithms for the portuguese language available in R. It unifies the API for the stemmers and provides easy stemming completion.</p>
 
 <h2>Installing</h2>
 
-<p><code>ptstem</code> is not yet available in CRAN. You can install directly from Github using:</p>
+<p>You can install directly from Github using:</p>
 
 <pre><code class="r">devtools::install_github(&quot;dfalbel/ptstem&quot;)
+</code></pre>
+
+<p>or from CRAN using:</p>
+
+<pre><code class="r">install.packages(&quot;ptstem&quot;)
 </code></pre>
 
 <h2>Using</h2>
@@ -112,6 +116,38 @@ ptstem(text, algorithm = &quot;hunspell&quot;)
 ptstem(text, algorithm = &quot;porter&quot;)
 #&gt; [1] &quot;Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é\no processo de reduzir palavras flexionadas (ou às vezes derivadas) ao seu tronco (stem), base ou\nraiz, geralmente uma forma da palavras escrita. O tronco não precisa ser idêntico à raiz morfológica\nda palavras; ele geralmente é suficiente que palavras relacionadas sejam mapeadas para o mesmo\ntronco, mesmo se este tronco não for ele próprio uma raiz válida. O estudo de algoritmos para\nstemização tem sido realizado em ciência da computação desde a década de 60. Vários motores de\nbuscas tratam palavras com o mesmo tronco com sinônimos com um tipo de expansão de consulta, em\num processo de combinação.&quot;
 </code></pre>
+
+<h2>Performance</h2>
+
+<p>The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk about two kinds of possible errors when stemming:</p>
+
+<ul>
+<li>  Understemming: Related words were not grouped because you didn&#39;t stem enought.</li>
+<li>  Overstemming: Unrelated words were grouped because you removed a large part of the word when stemming.</li>
+</ul>
+
+<p>To measure these errors the function <code>performance</code> was implemented. It returns a <code>data.frame</code> with 3 columns. The name of the stemmer and 2 metrics:</p>
+
+<ul>
+<li>  UI: the undersampling index. It&#39;s the proportion of related words that were not grouped.</li>
+<li>  OI: the overstemming index. It&#39;s the proportion of unrelated words that were grouped.</li>
+</ul>
+
+<p>Remember that OI is 0 if you don&#39;t stem. So I think the true objective of a stemming algorithm is to reduce UI without augmenting OI too much.</p>
+
+<p><code>ptstem</code> package provides a dataset of grouped words for the portuguese language (found in this <a href="http://www.inf.ufrgs.br/%7Efnflores/paice_tool/">link</a>). It&#39;s in this dataset that <code>performance</code> function calculates the metrics described above.</p>
+
+<p>See results:</p>
+
+<pre><code class="r">performance()
+#&gt;                 .id         UI         OI
+#&gt; 1              rslp 0.08540752 0.04929234
+#&gt; 2          hunspell 0.12835530 0.03221083
+#&gt; 3            porter 0.13958028 0.03221083
+#&gt; 4 modified-hunspell 0.05466081 0.06295754
+</code></pre>
+
+<p>This is not the only approach for measuring performance of the those algorithms. The article <a href="http://dx.doi.org/10.1016/j.ipm.2016.03.004"><em>Assessing the impact of Stemming Accuracy on Information Retrieval – A multilingual perspective</em></a> describes various ways to analyse stemming performance.</p>
 
   </div>
 

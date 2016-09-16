@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>ptstem_words. ptstem 0.0.1</title>
+<title>ptstem_words. ptstem 0.0.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -32,7 +32,7 @@
     <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="index.html">ptstem 0.0.1</a>
+      <a class="brand" href="index.html">ptstem 0.0.2</a>
       <div class="nav">
         <ul class="nav">
           <li><a href="index.html">Home</a></li>
@@ -54,9 +54,10 @@
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='ptstem.html'>ptstem_words</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="argument">algorithm</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"rslp"</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
+    <pre><span class="functioncall"><a href='ptstem.html'>ptstem_words</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="argument">algorithm</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"rslp"</span><span class="keyword">,</span> <span class="argument">complete</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">T</span><span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span>
 
-<span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="argument">algorithm</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"rslp"</span><span class="keyword">,</span> <span class="argument">n_char</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">3</span><span class="keyword">,</span> <span class="argument">ignore</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></pre>
+<span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="argument">algorithm</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="string">"rslp"</span><span class="keyword">,</span> <span class="argument">n_char</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="number">3</span><span class="keyword">,</span> <span class="argument">complete</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="symbol">T</span><span class="keyword">,</span>
+  <span class="argument">ignore</span>&nbsp;<span class="argument">=</span>&nbsp;NULL<span class="keyword">,</span> <span class="symbol">...</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
@@ -64,7 +65,10 @@
       <dd>character vector of words.</dd>
       <dt>algorithm</dt>
       <dd>string with the name of the algorithm to be used. One of <code>&quot;hunspell&quot;</code>,
-<code>&quot;rslp&quot;</code> and <code>&quot;porter&quot;</code>.</dd>
+<code>&quot;rslp&quot;</code>, <code>&quot;porter&quot;</code> and <code>modified-hunspell</code>.</dd>
+      <dt>complete</dt>
+      <dd>wheter to complete words or not i.e. change all words with the same stem by the word that appears
+the most with that stem.</dd>
       <dt>...</dt>
       <dd>other arguments passed to the algorithms.</dd>
       <dt>n_char</dt>
@@ -117,7 +121,8 @@ you are stemming in parallel.</p>
 [2] &quot;não coma doces, eles fazem mal para os dentes.&quot;
 </div>
 <div class='input'><span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">texts</span><span class="keyword">,</span> <span class="string">"porter"</span><span class="keyword">,</span> <span class="argument">n_char</span> <span class="argument">=</span> <span class="number">4</span><span class="keyword">,</span> <span class="argument">complete</span> <span class="argument">=</span> <span class="number">FALSE</span><span class="keyword">)</span></div>
-<div class='output'>[1] &quot;com frut pois elas faz bem par a saúd.&quot; &quot;não com doc, eles faz mal par os dent.&quot;
+<div class='output'>[1] &quot;com frut pois elas faz bem par a saúd.&quot;
+[2] &quot;não com doc, eles faz mal par os dent.&quot;
 </div>
 <div class='input'><span class="functioncall"><a href='ptstem.html'>ptstem</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="argument">ignore</span> <span class="argument">=</span> <span class="string">"av.*"</span><span class="keyword">)</span> <span class="comment"># words starting with "av" are not stemmed</span></div>
 <div class='output'>[1] &quot;balões&quot; &quot;aviões&quot; &quot;avião&quot;  &quot;gostou&quot; &quot;gostou&quot; &quot;gostou&quot;

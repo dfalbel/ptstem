@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-<title>unify_stems. ptstem 0.0.2</title>
+<title>performance. ptstem 0.0.2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 
@@ -49,43 +49,46 @@
         
       </header>
       
-      <h1>Unify stems by mean position</h1>
+      <h1>Performance</h1>
 
 <div class="row">
   <div class="span8">
     <h2>Usage</h2>
-    <pre><span class="functioncall"><a href='unify_stems.html'>unify_stems</a></span><span class="keyword">(</span><span class="symbol">words</span><span class="keyword">,</span> <span class="symbol">stems</span><span class="keyword">)</span></pre>
+    <pre><span class="functioncall"><a href='performance.html'>performance</a></span><span class="keyword">(</span><span class="argument">stemmers</span>&nbsp;<span class="argument">=</span>&nbsp;<span class="functioncall"><a href='http://www.rdocumentation.org/packages/base/topics/c'>c</a></span><span class="keyword">(</span><span class="string">"rslp"</span><span class="keyword">,</span> <span class="string">"hunspell"</span><span class="keyword">,</span> <span class="string">"porter"</span><span class="keyword">,</span> <span class="string">"modified-hunspell"</span><span class="keyword">)</span><span class="keyword">)</span></pre>
     
     <h2>Arguments</h2>
     <dl>
-      <dt>words</dt>
-      <dd>character vector of words</dd>
-      <dt>stems</dt>
-      <dd>character vector of stems</dd>
+      <dt>stemmers</dt>
+      <dd>a character vector with names of stemming algorithms.
+In the near future, functions will also be accepted.</dd>
     </dl>
     
+    <div class="Value">
+      <h2>Value</h2>
+
+      <p><dl>
+a data.frame with the following measures calculated for each stemmer:
+<dt>UI</dt><dd>Understemming Index</dd></p>
+
+      <p><dt>OI</dt><dd>Overstemming Index</dd></p>
+
+      <p></dl></p>
+
+    </div>
+
     <div class="Description">
       <h2>Description</h2>
 
-      <p>Hunspell can suggest a list of stems for a word. This function
-tries to aggregate all stems into one. Consider the folowing:</p>
+      <p>Performance</p>
 
     </div>
-
-    <div class="Details">
-      <h2>Details</h2>
-
-      <p>a c(1,2)
-b c(2,3)
-c c(3)</p>
-
-      <p>You want that a, b and c to have the same stem.</p>
-
-    </div>
-      </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'><span class="comment">## Not run: perf &amp;lt;- performance()</span></div></pre>
+  </div>
   <div class="span4 sidebar">
     <!-- <ul>
-      <li>unify_stems</li>
+      <li>performance</li>
     </ul>
     <ul>
       
