@@ -20,7 +20,7 @@ ptstem
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/dfalbel/ptstem?branch=master&svg=true)](https://ci.appveyor.com/project/dfalbel/ptstem)
 [![Coverage Status](https://img.shields.io/codecov/c/github/dfalbel/ptstem/master.svg)](https://codecov.io/github/dfalbel/ptstem?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ptstem)](https://cran.r-project.org/package=ptstem)
-[![](http://cranlogs.r-pkg.org/badges/ptstem)](http://cran.r-project.org/web/packages/ptstem/index.html)
+[![](http://cranlogs.r-pkg.org/badges/ptstem)](https://cran.r-project.org/package=ptstem)
 
 This packages wraps 3 stemming algorithms for the portuguese language available in R. It
 unifies the API for the stemmers and provides easy stemming completion.
