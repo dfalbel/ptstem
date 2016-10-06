@@ -1,3 +1,6 @@
+# ptstem 0.0.3
+* Add an overview vignette
+
 # ptstem 0.0.2
 
 * Add the `complete` argument. Before it was used undirectly.
