@@ -1,0 +1,177 @@
+---
+title: "ptstem: Stemming Algorithms for the Portuguese Language"
+author: "Daniel Falbel"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+> In linguistic morphology and information retrieval, stemming is the process of
+> reducing inflected (or sometimes derived) words to their word stem, base or 
+> root form—generally a written word form. The stem need not be identical to the 
+> morphological root of the word; it is usually sufficient that related words 
+> map to the same stem, even if this stem is not in itself a valid root. 
+> Algorithms for stemming have been studied in computer science since the 1960s. 
+> Many search engines treat words with the same stem as synonyms as a kind of 
+> query expansion, a process called conflation.
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Stemming)
+
+This paragraph gives a nice explanation of what *stemming* is. Much of academic 
+work on stemming was focused on English Language and it's somewhat hard to find
+stemming algorithms for other languages. `ptstem` tries to fix this, by 
+providing a comprehensive interface for Portuguese Language stemming algorithms. 
+
+The implemented algorithms are:
+
+- **rslp**: [RSLP](http://doi.ieeecomputersociety.org/10.1109/SPIRE.2001.10024) is a simple and effective suffix-stripping algorithm for Portuguese. Implemented in `R` in the [`rslp`](https://CRAN.R-project.org/package=rslp) package.
+- **hunspell**: [Hunspell](https://hunspell.github.io/) is the spell checker of LibreOffice, OpenOffice.org, Mozilla Firefox 3 & Thunderbird, Google Chrome, and it is also used by proprietary software packages, like Mac OS X, InDesign, memoQ, Opera and SDL Trados. It's implemented in `R` in the [`hunspell`](https://CRAN.R-project.org/package=hunspell) package.
+- **porter**: The [Porter stemming algorithm](https://tartarus.org/martin/PorterStemmer/) (or ‘Porter stemmer’) is a process for removing the commoner morphological and inflexional endings from words. In `R` it's implemented in the [`SnowballC`](https://CRAN.R-project.org/package=SnowballC) package.
+
+
+## Stemming
+
+`ptstem` has only one important function that is called `ptstem`. You can easily 
+stem a text by passing it to `ptstem`.
+
+```{r}
+library(ptstem)
+```
+
+### Example 1
+
+```{r}
+text <- "Em morfologia linguística e recuperação de informação a stemização (do inglês, stemming) é
+o processo de reduzir palavras flexionadas (ou às vezes derivadas) ao seu tronco (stem), base ou
+raiz, geralmente uma forma da palavra escrita. O tronco não precisa ser idêntico à raiz morfológica
+da palavra; ele geralmente é suficiente que palavras relacionadas sejam mapeadas para o mesmo
+tronco, mesmo se este tronco não for ele próprio uma raiz válida. O estudo de algoritmos para
+stemização tem sido realizado em ciência da computação desde a década de 60. Vários motores de
+buscas tratam palavras com o mesmo tronco como sinônimos como um tipo de expansão de consulta, em
+um processo de combinação."
+```
+
+```{r}
+ptstem(text)
+```
+
+By default `ptstem` uses the *rslp* algorithm to stem, and it complete stems with 
+the most frequent word in the text (This is explained later). Is this example 
+it's a little hard to see improvements with stemming, because the text doesn't 
+contain many words with the same root. Let's look at a more simple example.
+
+### Example 2
+
+```{r}
+text <- c("avião", "aviões", "aviação", "viação", "aves", "balão", "balões")
+ptstem(text)
+```
+
+You can return the suffix stripped words (without completion) by setting the
+argument `complete = FALSE`.
+
+```{r}
+ptstem(text, complete = FALSE)
+```
+
+You can also change the algorithm used to stem by setting the `algorithm` argument.
+
+```{r}
+ptstem(text, algorithm = "hunspell", complete = FALSE)
+```
+
+The hunspell stemmer is not a suffix-stripping algorithm, so it can find related
+words that has the same sufffix. It happened here with the word "aviação" that 
+was related to "viação" instead of "avião" and "aviões". Also you can see that 
+hunspell is returning valid words, even with `complete = FALSE`, but it does not 
+necessarily returns words that appear in the text, see:
+
+```{r}
+ptstem("aviões", "hunspell", complete = FALSE)
+```
+
+To use the Porter stemmer, simply tweak the `algorithm` argument again.
+
+```{r}
+ptstem(text, algorithm = "porter", complete = FALSE)
+```
+
+As Porter stemmer, is a general algorithm, it has some problems when detecting 
+irregular forms of words. In this example, the stemming didn't relate any words, 
+if you hadn't used the `complete = FALSE` argument, you wouldn't have noticed any
+difference between the input and the output vectors.
+
+```{r}
+ptstem(text, algorithm = "porter")
+```
+
+### Example 3
+
+`ptstem` has two other arguments that can be used to ignore words in stemming.
+
+- `n_char`: minimum number of characters of words to be stemmed
+- `ignore`: vector of words and regex's to igore
+
+Sometimes you have some words in a text that you don't want to stem, like 
+proper names or words in other languages and it's usefull to ignore them. 
+Sometimes you also have very small words, that if stemmed they loose their 
+meaning, the `rslp` algorithm has some rules about words lenghts, but `hunspell`
+does not. That's why `n_char` argument is available.
+
+```{r}
+text <- c("obama", "gostei", "gostou", "gostamos", "é", "e")
+```
+
+```{r}
+ptstem(text, complete = FALSE)
+```
+
+Here `rslp` stemmed "obama" to "obam" and "firmware" to "firmw". You can choose
+to not stem theese words by setting the `ignore` parameter.
+
+```{r}
+ptstem(text, complete = FALSE, ignore = c("obama"))
+```
+
+By default, `ptstem` does not stem words with less then three characters. If you
+set for at least 1 characters.
+
+```{r}
+ptstem(text, complete = FALSE, n_char = 1)
+```
+
+You can see that "e" and "é" were united.
+It's also possible to ignore regex's, using the `ignore` argument.
+
+```{r}
+ptstem(text, complete = FALSE, ignore = c("go."))
+```
+
+This doesn't stem words that start with "go".
+
+## Performance
+
+The goal of stemming algorithms is to group related words and to separate unrelated words. With this in mind, you can talk about two kinds of possible errors when stemming:
+
+* Understemming: Related words were not grouped because you didn't stem enought.
+* Overstemming: Unrelated words were grouped because you removed a large part of the word when stemming.
+
+To measure these errors the function `performance` was implemented. It returns a `data.frame` with 3 columns. The name of the stemmer and 2 metrics:
+
+* UI: the undersampling index. It's the proportion of related words that were not grouped.
+* OI: the overstemming index. It's the proportion of unrelated words that were grouped. 
+
+Remember that OI is 0 if you don't stem. So I think the true objective of a stemming algorithm is to reduce UI without augmenting OI too much.
+
+`ptstem` package provides a dataset of grouped words for the portuguese language (found in this [link](http://www.inf.ufrgs.br/~fnflores/paice_tool/)). It's in this dataset that `performance` function calculates the metrics described above.
+
+See results:
+
+```{r}
+performance()
+```
+
+This is not the only approach for measuring performance of the those algorithms. The article [*Assessing the impact of Stemming Accuracy on Information Retrieval – A multilingual perspective*](http://dx.doi.org/10.1016/j.ipm.2016.03.004) describes various ways to analyse stemming performance.

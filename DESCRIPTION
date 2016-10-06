@@ -22,4 +22,7 @@ Imports:
 Suggests:
     testthat,
     covr,
-    plyr
+    plyr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
