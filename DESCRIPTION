@@ -1,7 +1,7 @@
 Package: ptstem
 Type: Package
 Title: Stemming Algorithms for the Portuguese Language
-Version: 0.0.2.9000
+Version: 0.0.2.9001
 Authors@R: person("Daniel", "Falbel", email = "dfalbel@gmail.com",
                   role = c("aut", "cre"))
 Description: Wraps a collection of stemming algorithms for the Portuguese
@@ -18,7 +18,8 @@ Imports:
     rslp,
     SnowballC,
     stringr,
-    tidyr
+    tidyr,
+    tokenizers
 Suggests:
     testthat,
     covr,

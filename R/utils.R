@@ -17,7 +17,8 @@ complete_stems <- function(words, stems){
 #' @param texts character vector of texts
 #' @note it uses the regex \code{\\b[:alpha:]+\\b} to extract words.
 extract_words <- function(texts){
-  words <- stringr::str_extract_all(texts, "\\b[:alpha:]+\\b") %>%
-    unlist %>% unique
+  words <- tokenizers::tokenize_words(texts) %>%
+    unlist() %>%
+    unique()
   return(words)
 }
