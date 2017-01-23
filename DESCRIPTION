@@ -27,3 +27,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Remotes: 
+    tidyverse/stringr
