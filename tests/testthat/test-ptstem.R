@@ -77,5 +77,3 @@ test_that("error when ignore is NA", {
   expect_error(ptstem("oi, tudo bem?", ignore = NA))
 })
 
-
-

@@ -60,6 +60,14 @@ ptstem_words <- function(words, algorithm = "rslp", complete = T, ...){
 ptstem <- function(texts, algorithm = "rslp", n_char = 3, complete = T, ignore = NULL, ...){
   stopifnot(algorithm %in% c("hunspell", "rslp", "porter", "modified-hunspell"))
   stopifnot(complete %in% c(TRUE, FALSE) & (!is.numeric(complete)))
+
+  # if is null -> NA
+  if(!is.null(ignore)) {
+    if(is.na(ignore)) {
+      stop("ignore must not be NA, try NULL instead.")
+    }
+  }
+
   words <- extract_words(texts)
   words <- words[stringr::str_length(words) >= n_char]
   if (!is.null(ignore)) {
