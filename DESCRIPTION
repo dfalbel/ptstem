@@ -1,7 +1,7 @@
 Package: ptstem
 Type: Package
 Title: Stemming Algorithms for the Portuguese Language
-Version: 0.0.3
+Version: 0.0.3.9001
 Authors@R: person("Daniel", "Falbel", email = "dfalbel@gmail.com",
                   role = c("aut", "cre"))
 Description: Wraps a collection of stemming algorithms for the Portuguese
