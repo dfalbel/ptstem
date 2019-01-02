@@ -62,7 +62,7 @@ unify_stems <- function(words, stems){
   word_stem <- stem_df %>%
     tidyr::unnest(stems) %>%
     dplyr::group_by(stems) %>%
-    dplyr::mutate(n_stem = n()) %>%
+    dplyr::mutate(n_stem = dplyr::n()) %>%
     dplyr::ungroup()
 
   stem_stem <- dplyr::left_join(
