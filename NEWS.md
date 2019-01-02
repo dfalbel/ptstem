@@ -1,3 +1,7 @@
+# ptstem 0.0.4
+
+* Fixes for dplyr 0.8.0
+
 # ptstem 0.0.3
 
 * Using the tokenizers package to extract words from text
