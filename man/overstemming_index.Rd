@@ -15,4 +15,3 @@ so the function can identify groups of words.}
 \description{
 It calculates the proportion of unrelated words that were combined.
 }
-

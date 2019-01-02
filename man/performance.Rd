@@ -4,7 +4,8 @@
 \alias{performance}
 \title{Performance}
 \usage{
-performance(stemmers = c("rslp", "hunspell", "porter", "modified-hunspell"))
+performance(stemmers = c("rslp", "hunspell", "porter",
+  "modified-hunspell"))
 }
 \arguments{
 \item{stemmers}{a character vector with names of stemming algorithms.
@@ -22,4 +23,3 @@ Performance
 \dontrun{perf <- performance()}
 
 }
-

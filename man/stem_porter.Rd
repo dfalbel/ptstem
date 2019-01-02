@@ -21,4 +21,3 @@ reading stemmed texts very difficult, this function provides an option
 to complete the stemmed words. By default it completes with the most used
 word in the text that has the same stem.
 }
-

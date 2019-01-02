@@ -17,4 +17,3 @@ Extracts all words from a character string of texts.
 \note{
 it uses the regex \code{\\b[:alpha:]+\\b} to extract words.
 }
-

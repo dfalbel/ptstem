@@ -15,4 +15,3 @@ so the function can identify groups of words.}
 \description{
 It calculates the proportion of related words that had different stems.
 }
-

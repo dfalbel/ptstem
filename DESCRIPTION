@@ -9,7 +9,7 @@ Description: Wraps a collection of stemming algorithms for the Portuguese
 URL: https://github.com/dfalbel/ptstem
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 Encoding: UTF-8
 Imports:
     dplyr,

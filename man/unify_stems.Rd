@@ -22,4 +22,3 @@ c c(3)
 
 You want that a, b and c to have the same stem.
 }
-
