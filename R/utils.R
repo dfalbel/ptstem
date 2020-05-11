@@ -2,7 +2,7 @@
 #' @param words character vector of words
 #' @param stems character vector of stems
 complete_stems <- function(words, stems){
-  stem_word <- dplyr::data_frame(words = words, stems = stems) %>%
+  stem_word <- tibble::tibble(words = words, stems = stems) %>%
     dplyr::group_by(words) %>%
     dplyr::mutate(n_word = dplyr::n()) %>%
     dplyr::ungroup() %>%

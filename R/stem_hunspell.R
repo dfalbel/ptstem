@@ -22,7 +22,7 @@ stem_hunspell <- function(words, complete = TRUE){
   )
 
   word_stem <- unify_stems(words, stems) %>%
-    dplyr::right_join(dplyr::data_frame(words = words), by = "words") %>%
+    dplyr::right_join(tibble::tibble(words = words), by = "words") %>%
     dplyr::mutate(stems = stems)
 
   if (complete == FALSE) {
@@ -54,7 +54,7 @@ stem_hunspell <- function(words, complete = TRUE){
 #'
 unify_stems <- function(words, stems){
 
-  stem_df <- dplyr::data_frame(
+  stem_df <- tibble::tibble(
     words = words,
     stems = stems
   )

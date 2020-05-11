@@ -19,7 +19,8 @@ Imports:
     SnowballC,
     stringr,
     tidyr,
-    tokenizers
+    tokenizers, 
+    tibble
 Suggests:
     testthat,
     covr,

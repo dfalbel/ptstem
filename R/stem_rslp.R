@@ -25,7 +25,7 @@ stem_rslp <- function(words, complete = TRUE){
   } else {
 
     stem_word <- complete_stems(words, stems)
-    word_stem <- dplyr::data_frame(words = words, stems = stems) %>%
+    word_stem <- tibble::tibble(words = words, stems = stems) %>%
       dplyr::left_join(stem_word, by = "stems")
 
     return(word_stem$new_stems)
