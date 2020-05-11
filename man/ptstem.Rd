@@ -7,8 +7,7 @@
 \usage{
 ptstem_words(words, algorithm = "rslp", complete = T, ...)
 
-ptstem(texts, algorithm = "rslp", n_char = 3, complete = T,
-  ignore = NULL, ...)
+ptstem(texts, algorithm = "rslp", n_char = 3, complete = T, ignore = NULL, ...)
 }
 \arguments{
 \item{words, texts}{character vector of words.}
